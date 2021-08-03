@@ -50,7 +50,7 @@ class Welcome extends React.Component {
   - **`componentDidMount()`**
     - Immediately invoked after a component is mounted (inserted into the DOM tree). Initialization that requires a DOM node should go here, such as a fetch to grab data.
     - Also a great place to set up subscriptions (in which case, you will need to use `componentWillUnmount()` to set unsubscribe)
-    - You may call `this.setState()` immediately in `componentDidMount()`. This will trigger an extra rendering, but it will happen before the browser updates the screen.
+    - You may call `this.setState()` immediately in `componentDidMount()`. This will trigger an extra rendering, but it will happen before the browser updates the screen. This guarantees even though `render()` will be called twice, the user won't see the intermediate state of the component.
 
 ### Updating
 

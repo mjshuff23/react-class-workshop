@@ -55,16 +55,35 @@ class Welcome extends React.Component {
 ### Updating
 
 - An update can be caused by changes to props or state. These methods are called in the following order when a component is being re-rendered. This is similar to adding items to the _dependancy array_ in `useEffect()`
+
   - `static getDerivedStateFromProps()`
   - `shouldComponentUpdate()`
   - **`render()`**
   - `getSnapshotBeforeUpdate()`
-  - **`componentDidUpdate()`**
+  - **`componentDidUpdate(prevProps, prevState, snapshot)`**
+
+    - Immediately invoked after updating occurs. Not called during the initial render
+    - Use this as an opportunity to operate on the DOM when the component has been updated
+    - Can also be used to do network requests as long as you compare the previous props to the current props (may not be necessary if props haven't changed)
+
+      ```javascript
+      componentDidUpdate(prevProps) {
+        // Typical usage (don't forget to compare props):
+        if (this.props.userID !== prevProps.userID) {
+          this.fetchData(this.props.userID);
+        }
+      }
+      ```
+
+    - You may call `this.setState()` in `componentDidUpdate()`, but it must be wrapped in a conditional, otherwise you're going to have an infinite loop.
+    - Will not be invoked if `shouldComponentUpdate()` returns `false`
 
 ### Unmounting
 
 - This method is called when a component is being removed from the DOM. This is emulated in `useEffect()` by returning a function at the end of the callback.
   - **`componentWillUnmount()`**
+    - Invoked immediately before a component is unmounted and destroyed. This is where you want to perform any necessary cleanup, such as invalidating timers, cancelling network requests, and cleaning up subscriptions created in `componentDidMount()`
+    - You should not call `this.setState()` in this method, because the component will not be re-rendered
 
 ### Error Handling
 
@@ -76,6 +95,8 @@ class Welcome extends React.Component {
 
 - Each component also provides these APIs:
   - `setState()`
+    - Enqueues changes to the component state and tells React that this component and it's children need to be re-rendered with the updated state.
+    - Primary method used to update the user interfact in response to event handlers and server responses
   - `forceUpdate()`
 
 ## Class Properties

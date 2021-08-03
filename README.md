@@ -20,10 +20,37 @@ class Welcome extends React.Component {
 ### Mounting
 
 - These are called in the following order when an instance of a component is being created and inserted into the DOM. This is the initial function that runs in `useEffect()` on render
+
   - **`constructor()`**
+
+    - Called before a component is mounted
+    - If you don’t initialize state and you don’t bind methods, you don’t need to implement a constructor for your React component.
+    - When implementing a component with a constructor, you should call `super(props)` before any other statements, otherwise `this.props` will be `undefined`
+    - Only needs to be used when initializing local state with `this.state` and when binding event handler methods to an instance
+
+      - This is the only place you should modify `this.state` directly. This is where we set initial state. Otherwise, use `this.setState()`
+      - Avoid copying props to state:
+
+        ```javascript
+        constructor(props) {
+          super(props);
+          // Don't do this!
+          this.state = { color: props.color };
+        }
+        ```
+
+        - Updates to the `color` prop won't be reflected in state. Use `this.props.color` instead
+        - You CAN use this pattern if you intentionally want to ignore prop updates. In this case we would rename the prop `initialColor` or `defaultColor`
+
   - `static getDerivedStateFromProps()`
   - **`render()`**
+    - Examines `this.props` and `this.state` and returns React Elements and primitive data types
+    - Should be a _pure function_, meaning it does not modify state and returns the same thing every time
+    - `render()` will not be invoked if `shouldComponentUpdate()` returns `false`.
   - **`componentDidMount()`**
+    - Immediately invoked after a component is mounted (inserted into the DOM tree). Initialization that requires a DOM node should go here, such as a fetch to grab data.
+    - Also a great place to set up subscriptions (in which case, you will need to use `componentWillUnmount()` to set unsubscribe)
+    - You may call `this.setState()` immediately in `componentDidMount()`. This will trigger an extra rendering, but it will happen before the browser updates the screen.
 
 ### Updating
 
@@ -33,3 +60,30 @@ class Welcome extends React.Component {
   - **`render()`**
   - `getSnapshotBeforeUpdate()`
   - **`componentDidUpdate()`**
+
+### Unmounting
+
+- This method is called when a component is being removed from the DOM. This is emulated in `useEffect()` by returning a function at the end of the callback.
+  - **`componentWillUnmount()`**
+
+### Error Handling
+
+- These methods are called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component
+  - `static getDerivedStateFromProps()`
+  - `componentDidCatch()`
+
+## Other APIs
+
+- Each component also provides these APIs:
+  - `setState()`
+  - `forceUpdate()`
+
+## Class Properties
+
+- `defaultProps`
+- `displayName`
+
+## Instance Properties
+
+- `props`
+- `state`

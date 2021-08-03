@@ -1,9 +1,12 @@
 import React from 'react';
+import Errors from './components/Errors.js';
 
 function App() {
-  return (
-    <h1>Hello world!</h1>
-  );
+	return (
+		<React.Fragment>
+			<Errors></Errors>
+		</React.Fragment>
+	);
 }
 
 export default App;

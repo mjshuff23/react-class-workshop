@@ -39,6 +39,7 @@ class Header extends React.Component {
 						onChange={this.updateHeader}
 					/>
 				</label>
+				<hr />
 			</header>
 		);
 	}

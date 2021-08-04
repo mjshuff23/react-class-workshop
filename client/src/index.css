@@ -4,6 +4,7 @@
 	text-align: center;
 }
 
-input {
-	margin-left: 10px;
+button {
+	display: block;
+	margin: 0 auto;
 }

@@ -16,6 +16,10 @@ class Header extends React.Component {
 		console.log(this.state.header);
 	}
 
+	componentWillUnmount() {
+		console.log('Unmounting Header');
+	}
+
 	updateHeader = (e) => {
 		this.setState({
 			header: e.target.value,

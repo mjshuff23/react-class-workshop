@@ -1,23 +1,8 @@
 /* TODO Add site wide styles */
-body {
-	font: 14px 'Century Gothic', Futura, sans-serif;
-	margin: 20px;
+.Header {
+	text-align: center;
 }
 
-ol,
-ul {
-	padding-left: 30px;
-}
-
-.kbd-navigation .square:focus {
-	background: #ddd;
-}
-
-.game {
-	display: flex;
-	flex-direction: row;
-}
-
-.game-info {
-	margin-left: 20px;
+input {
+	margin-left: 10px;
 }

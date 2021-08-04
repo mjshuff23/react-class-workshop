@@ -1,12 +1,8 @@
 import React from 'react';
-import Errors from './components/Errors.js';
+import Header from './components/Header';
 
 function App() {
-	return (
-		<React.Fragment>
-			<Errors></Errors>
-		</React.Fragment>
-	);
+	return <Header />;
 }
 
 export default App;

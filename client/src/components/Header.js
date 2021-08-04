@@ -1,38 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-function Header() {
-	// This is the same as this.state in a class component
-	const [header, setHeader] = useState('This is a Header!');
-	const [initialMount, setInitialMount] = useState(false);
-	// useEffect with an empty dependency array is the equivalent of componentDidMount();
-	useEffect(() => {
-		// A little hacky, but this is how you can separate componentDidMount() and componentDidUpdate()
-		if (!initialMount) {
-			console.log('Header mounted');
-			setInitialMount(true);
-		} else {
-			console.log(header);
-		}
-	}, [header]);
+class Header extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			header: 'Header',
+		};
+	}
 
-	const updateHeader = (e) => {
-		setHeader(e.target.value);
+	componentDidMount() {
+		console.log('Header mounted');
+	}
+
+	componentDidUpdate() {
+		console.log(this.state.header);
+	}
+
+	updateHeader = (e) => {
+		this.setState({
+			header: e.target.value,
+		});
 	};
 
-	return (
-		<header className="Header">
-			<h1>{header}</h1>
-			<label>
-				Update Header:
-				<input
-					className="header-input"
-					type="text"
-					value={header}
-					onChange={updateHeader}
-				/>
-			</label>
-		</header>
-	);
+	render() {
+		return (
+			<header className="Header">
+				<h1>{this.state.header}</h1>
+				<label>
+					Update Header:
+					<input
+						className="header-input"
+						type="text"
+						value={this.state.header}
+						onChange={this.updateHeader}
+					/>
+				</label>
+			</header>
+		);
+	}
 }
 
 export default Header;

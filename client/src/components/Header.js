@@ -31,6 +31,7 @@ function Header() {
 					onChange={updateHeader}
 				/>
 			</label>
+			<hr />
 		</header>
 	);
 }

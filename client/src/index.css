@@ -1,5 +1,6 @@
 /* TODO Add site wide styles */
-.Header {
+.Header,
+.Main {
 	text-align: center;
 }
 

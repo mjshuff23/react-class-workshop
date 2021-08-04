@@ -28,7 +28,7 @@ function Main() {
 	};
 
 	return (
-		<main>
+		<main className="Main">
 			<p>{body}</p>
 			{bodyLoaded && <button onClick={updateCounter}>Fetch new person</button>}
 		</main>

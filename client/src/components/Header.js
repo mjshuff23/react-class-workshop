@@ -15,7 +15,7 @@ function Header() {
 		}
 
 		return () => {
-			console.log('Unmounting Header');
+			console.log('Running cleanup function');
 		};
 	}, [header]);
 

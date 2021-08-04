@@ -13,6 +13,10 @@ function Header() {
 		} else {
 			console.log(header);
 		}
+
+		return () => {
+			console.log('Unmounting Header');
+		};
 	}, [header]);
 
 	const updateHeader = (e) => {

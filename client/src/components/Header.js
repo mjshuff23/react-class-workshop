@@ -1,43 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+// import { connect } from 'react-redux'
+class Header extends React.Component {
+	constructor() {
+		super();
 
-function Header() {
-	// This is the same as this.state in a class component
-	const [header, setHeader] = useState('This is a Header!');
-	const [initialMount, setInitialMount] = useState(false);
-	// useEffect with an empty dependency array is the equivalent of componentDidMount();
-	useEffect(() => {
-		// A little hacky, but this is how you can separate componentDidMount() and componentDidUpdate()
-		if (!initialMount) {
-			console.log('Header mounted');
-			setInitialMount(true);
-		} else {
-			console.log(header);
-		}
-
-		return () => {
-			console.log('Running cleanup function');
+		this.state = {
+			header: 'This is a Header!',
+			name: '',
 		};
-	}, [header]);
+	}
 
-	const updateHeader = (e) => {
-		setHeader(e.target.value);
+	componentDidMount() {
+		console.log('Header mounted!');
+	}
+
+	componentDidUpdate() {
+		console.log('Component Updated');
+	}
+
+	componentWillUnmount() {
+		console.log('Unmounting Header');
+	}
+
+	updateHeader = (e) => {
+		this.setState({
+			header: e.target.value,
+		});
 	};
 
-	return (
-		<header className="Header">
-			<h1>{header}</h1>
-			<label>
-				Update Header:
-				<input
-					className="header-input"
-					type="text"
-					value={header}
-					onChange={updateHeader}
-				/>
-			</label>
-			<hr />
-		</header>
-	);
+	render() {
+		const { header } = this.state;
+		return (
+			<header className="Header">
+				<h1>{header}</h1>
+				<label>
+					Update Header:
+					<input
+						className="header-input"
+						type="text"
+						value={header}
+						onChange={this.updateHeader}
+					/>
+				</label>
+				<hr />
+			</header>
+		);
+	}
 }
+
+/* const mapStateToProps = state => ({
+   counter: state.counter
+ });
+
+const mapDispatchToProps = () => {
+	return {
+		increment,
+		decrement,
+	};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps()
+)(App); */
 
 export default Header;

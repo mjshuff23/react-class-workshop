@@ -1,19 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './components/Header';
 
-function App() {
-	let [headerMounted, setHeaderMounted] = useState(true);
+class App extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			headerMounted: true,
+		};
+	}
 
-	const unmountHeader = () => {
-		setHeaderMounted(false);
+	unmountHeader = () => {
+		this.setState({
+			headerMounted: false,
+		});
 	};
 
-	return (
-		<>
-			{headerMounted && <Header />}
-			{headerMounted && <button onClick={unmountHeader}>Remove Header</button>}
-		</>
-	);
+	render() {
+		const { headerMounted } = this.state;
+		return (
+			<>
+				{headerMounted && <Header />}
+				{headerMounted && (
+					<button onClick={this.unmountHeader}>Remove Header</button>
+				)}
+			</>
+		);
+	}
 }
+
+// function App() {
+// 	let [headerMounted, setHeaderMounted] = useState(true);
+
+// 	const unmountHeader = () => {
+// 		setHeaderMounted(false);
+// 	};
+
+// 	return (
+<>
+	{/* {headerMounted && <Header title={title} />}
+			{headerMounted && <button onClick={unmountHeader}>Remove Header</button>} */}
+</>;
+// 	);
+// }
 
 export default App;
